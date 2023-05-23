@@ -127,15 +127,17 @@ function taskAdder(title){
     
 }
 
-
+// localStorage.clear();
 let body = document.querySelector('body')
-localStorage.setItem('updatedHTML', body.innerHTML)
-var saved = localStorage.getItem('updatedHTML');
+let reload = document.querySelector('#reload');
+reload.addEventListener("click", ()=>{
+  
+    var saved = localStorage.getItem('updatedHTML');
 
-if (saved) {
-    body.innerHTML = saved;    
-}
-
+    if (saved) {
+        body.innerHTML = saved;    
+    }
+})
 
 let orderBtn = document.querySelector('#ordered');
 orderBtn.addEventListener("click", ()=> {
