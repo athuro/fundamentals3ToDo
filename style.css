@@ -1,0 +1,17 @@
+h1 {
+    color: palevioletred;
+}
+
+h2 {
+    color: darkgreen;
+    text-decoration: underline;
+}
+
+.ord {
+    color: rgb(80, 12, 163);
+}
+
+.incomplete {
+    color: red;
+    font-size: 18px;
+}
