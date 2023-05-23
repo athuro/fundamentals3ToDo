@@ -29,7 +29,9 @@ function addElement(type, title){
     
     if(type === 'ol'){ 
         let newOl = document.createElement("ol");
-        newOl.innerHTML=(`<h2 id="${title}">${title}</h2>`);
+        newOl.setAttribute('class',`listBin`);
+        newOl.setAttribute('id', `${title}-list`)
+        newOl.innerHTML=(`<h2>${title}</h2>`);
 
         let builder = document.querySelector("#builder");
         builder.appendChild(newOl);
@@ -43,7 +45,9 @@ function addElement(type, title){
 
     } else if(type ==="ul"){
         let newUl = document.createElement("ul");
-        newUl.innerHTML=(`<h2 id="${title}">${title}</h2>`);
+        newUl.setAttribute('class',`listBin`);
+        newUl.setAttribute('id', `${title}-list`)
+        newUl.innerHTML=(`<h2>${title}</h2>`);
         
         let builder = document.querySelector("#builder");
         builder.appendChild(newUl);
@@ -58,8 +62,8 @@ function addElement(type, title){
 }
 
 function taskAdder(title){
-    let newList = document.querySelector(`#${title}`)
-
+    let newList = document.querySelector(`#${title}-list`)
+    console.log(newList)
     let task = document.createElement('input');
     task.setAttribute('placeholder','Insert Task')
     task.setAttribute('type','text');
@@ -88,6 +92,10 @@ function taskAdder(title){
             taskInput.setAttribute('id',`${userInput}-taskContent`)
     });
 
+        if(userInput === 'delete'){
+            newList.remove()
+        }
+
  
         let item = document.createElement('li');
         item.setAttribute('class', 'incomplete');
@@ -108,7 +116,10 @@ function taskAdder(title){
             if(check.checked){
                 item.setAttribute('class','complete')
             } else {
-                item.setAttribute('class','incomplete')
+                item.setAttribute('class','archived')
+                let archive = document.querySelector("#archive-list")
+                check.remove()
+                archive.appendChild(item)
             }
         });
     });
@@ -117,8 +128,14 @@ function taskAdder(title){
 }
 
 
+let body = document.querySelector('body')
+localStorage.setItem('updatedHTML', body.innerHTML)
+var saved = localStorage.getItem('updatedHTML');
 
-// Button builders
+if (saved) {
+    body.innerHTML = saved;    
+}
+
 
 let orderBtn = document.querySelector('#ordered');
 orderBtn.addEventListener("click", ()=> {
@@ -131,5 +148,14 @@ unOrderBtn.addEventListener("click", ()=> {
     listBuilder('ul');
 
 });
+
+let clearBtn = document.querySelector('#clear');
+let archiveList = document.querySelector('#archive-list')
+clearBtn.addEventListener('click', ()=>archiveList.remove());
+
+
+addEventListener("beforeunload",() => {
+    localStorage.setItem('updatedHTML', body.innerHTML)
+}, true);
 
 

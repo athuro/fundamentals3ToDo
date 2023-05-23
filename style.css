@@ -1,17 +1,89 @@
+#overallTitle {
+    grid-area: top;
+    background-color: rgb(189, 231, 154);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 50%, 50%;
+    grid-template-areas: "top top"
+                         "main archive";
+    background: antiquewhite;
+}
+
+button {
+    background: darkolivegreen;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px;
+}
+
+input {
+    margin: 15px;
+}
+
+ul {
+    list-style-type : circle;
+}
+
+#archive {
+    background-color: whitesmoke;
+    border: 2px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: rgb(189, 231, 154);
+    grid-area: archive;
+    margin: 20px;
+}
+
+#clear {
+    position: absolute;
+    left: 85%;
+    top: 25%;
+}
+
+.listBin {
+    background-color: whitesmoke;
+    border: 2px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: rgb(189, 231, 154);
+    margin: 20px;
+
+}
+
+#builder {
+    grid-area: main;
+    background-color: whitesmoke;
+    border: 2px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: rgb(189, 231, 154);
+    margin: 20px;
+}
+
+
+
 h1 {
     color: palevioletred;
+    padding: 5px;
+    text-shadow: 2px 2px 2px paleturquoise;
 }
 
 h2 {
-    color: brown;
+    color: rgb(100, 75, 13);
+    padding: 5px;
+    margin: 5px;
+    text-decoration: underline;
+    text-transform: uppercase;
 }
 
-.ord {
-    color: rgb(80, 12, 163);
-}
 
 .incomplete {
-    color: red;
+    color: rgb(234, 26, 26);
     font-size: 18px;
 }
 
@@ -20,3 +92,9 @@ h2 {
     font-size: 18px;
     text-decoration: line-through;
 }
+
+.archived {
+    color: green;
+    font-size: 18px;
+}
+
