@@ -3,8 +3,7 @@ h1 {
 }
 
 h2 {
-    color: darkgreen;
-    text-decoration: underline;
+    color: brown;
 }
 
 .ord {
@@ -14,4 +13,10 @@ h2 {
 .incomplete {
     color: red;
     font-size: 18px;
+}
+
+.complete {
+    color: green;
+    font-size: 18px;
+    text-decoration: line-through;
 }

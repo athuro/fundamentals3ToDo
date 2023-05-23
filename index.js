@@ -7,7 +7,10 @@ function listBuilder(listType){
     builder.appendChild(title);
 
     let titleInput = document.querySelector('.titleName');
-    titleInput.addEventListener("input", (eventObject) => userInput = eventObject.target.value);
+    titleInput.addEventListener("input", (eventObject) => {
+        userInput = eventObject.target.value;
+        title.setAttribute('id',`${userInput}-titleName`);
+    });
 
     let submit = document.createElement('button')
     submit.innerHTML=('Create!')
@@ -15,7 +18,11 @@ function listBuilder(listType){
     builder.appendChild(submit);
 
     let submitButton = document.querySelector('.listButton');
-    submitButton.addEventListener('click', ()=>addElement(listType, userInput));
+    submitButton.addEventListener('click', ()=> {
+        submit.setAttribute('id', `${userInput}-listButton`);
+        addElement(listType, userInput)
+        
+    });
 }
 
 function addElement(type, title){
@@ -27,9 +34,9 @@ function addElement(type, title){
         let builder = document.querySelector("#builder");
         builder.appendChild(newOl);
 
-        let listButton = document.querySelector('.listButton');
+        let listButton = document.querySelector( `#${userInput}-listButton`);
         listButton.remove();
-        let titleInput = document.querySelector('.titleName');
+        let titleInput = document.querySelector(`#${userInput}-titleName`);
         titleInput.remove();
 
         taskAdder(title)
@@ -41,9 +48,9 @@ function addElement(type, title){
         let builder = document.querySelector("#builder");
         builder.appendChild(newUl);
 
-        let listButton = document.querySelector('.listButton');
+        let listButton = document.querySelector( `#${userInput}-listButton`);
         listButton.remove();
-        let titleInput = document.querySelector('.titleName');
+        let titleInput = document.querySelector(`#${userInput}-titleName`);
         titleInput.remove();
 
         taskAdder(title)
@@ -56,29 +63,57 @@ function taskAdder(title){
     let task = document.createElement('input');
     task.setAttribute('placeholder','Insert Task')
     task.setAttribute('type','text');
-    task.setAttribute('class','taskInput');
+    task.setAttribute('class','taskInput')
+    task.setAttribute('id','current');
     newList.appendChild(task);
 
-    let taskInput = document.querySelector('.taskInput');
-    taskInput.addEventListener("input", (eventObject) => userInput = eventObject.target.value);
+    let taskInput = document.querySelector('#current');
+    taskInput.addEventListener("input", (eventObject) => {
+        userInput = eventObject.target.value;
+        taskInput.setAttribute('id',`${userInput}-taskContent`)
+    });
 
-    let submit = document.createElement('button')
-    submit.innerHTML=('Add!')
-    submit.setAttribute('class','taskButton')
+    let submit = document.createElement('button');
+    submit.innerHTML=('Add!');
+    submit.setAttribute('class','taskButton');
+    submit.setAttribute('id',`${userInput}-addButton`);
     newList.appendChild(submit);
 
-    let submitButton = document.querySelector('.taskButton');
-    submitButton.addEventListener('click', ()=>{
+    let addButton = document.querySelector(`#${userInput}-addButton`);
+    addButton.addEventListener('click', ()=>{
 
+        let taskInput = document.querySelector(`#${userInput}-taskContent`);
+        taskInput.addEventListener("input", (eventObject) => {
+            userInput = eventObject.target.value;
+            taskInput.setAttribute('id',`${userInput}-taskContent`)
+    });
+
+ 
         let item = document.createElement('li');
         item.setAttribute('class', 'incomplete');
-        let check = document.createElement('input');
-        check.setAttribute('type','checkbox')
+        item.setAttribute('id', `${userInput}`);
         item.innerHTML = `${userInput}`;
-        item.appendChild(check)
         newList.appendChild(item)
-        taskInput.value='';
+
+        let check = document.createElement('input');
+        check.setAttribute('type','checkbox');
+        check.setAttribute('class', 'checks');
+        check.setAttribute('id', `${userInput}`)
+        item.appendChild(check)
+
+        taskInput.value = '';
+        userInput = '';
+
+        check.addEventListener('change', () => {
+            if(check.checked){
+                item.setAttribute('class','complete')
+            } else {
+                item.setAttribute('class','incomplete')
+            }
+        });
     });
+
+    
 }
 
 
@@ -96,3 +131,5 @@ unOrderBtn.addEventListener("click", ()=> {
     listBuilder('ul');
 
 });
+
+
